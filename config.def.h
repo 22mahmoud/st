@@ -5,8 +5,11 @@
  *
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
-static char *font = "mono:pixelsize=13:antialias=true:autohint=true";
-static char *font2[] = { "JoyPixels:pixelsize=13:antialias=true:autohint=true", "Tajawal:pixelsize=13:antialias=true:autohint=true" };
+static char *font = "monospace:pixelsize=13:antialias=true:autohint=true";
+static char *font2[] = { 
+  "Noto Color Emoji:pixelsize=13:antialias=true:autohint=true",
+  "Tajawal:pixelsize=13:antialias=true:autohint=true" 
+};
 
 static int borderpx = 2;
 
@@ -179,7 +182,6 @@ static uint forcemousemod = ShiftMask;
  */
 ResourcePref resources[] = {
 		{ "font",         STRING,  &font },
-		{ "font2",        STRING,  &font2[1] },
 		{ "color0",       STRING,  &colorname[0] },
 		{ "color1",       STRING,  &colorname[1] },
 		{ "color2",       STRING,  &colorname[2] },
