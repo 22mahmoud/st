@@ -2176,18 +2176,49 @@ resource_load(XrmDatabase db, char *name, enum resource_type rtype, void *dst)
 void
 config_init(void)
 {
-	char *resm;
-	XrmDatabase db;
+	char *xrm;
+	XrmDatabase xrdb;
 	ResourcePref *p;
+	Display *dpy;
+
+	if(!(dpy = XOpenDisplay(NULL)))
+		die("Can't open display\n");
+
 
 	XrmInitialize();
-	resm = XResourceManagerString(xw.dpy);
-	if (!resm)
-		return;
+	xrm = XResourceManagerString(dpy);
 
-	db = XrmGetStringDatabase(resm);
-	for (p = resources; p < resources + LEN(resources); p++)
-		resource_load(db, p->name, p->type, p->dst);
+	if (xrm != NULL) {
+		xrdb = XrmGetStringDatabase(xrm);
+		for (p = resources; p < resources + LEN(resources); p++)
+			resource_load(xrdb, p->name, p->type, p->dst);
+	}
+
+	XFlush(dpy);
+}
+
+void
+reload(int sig)
+{
+	signal(SIGUSR1, reload);
+
+	if (sig == -1) {
+		return;
+	}
+
+	config_init();
+
+	/* colors, fonts */
+	xloadcols();
+	xunloadfonts();
+	xloadfonts(usedfont, 0);
+	xsetcursor(cursorshape);
+
+	/* pretend the window just got resized */
+	cresize(win.w, win.h);
+	redraw();
+	/* triggers re-render if we're visible. */
+	ttywrite("\033[O", 3, 1);
 }
 
 void
@@ -2277,6 +2308,7 @@ run:
 	xinit(cols, rows);
 	xsetenv();
 	selinit();
+	reload(-1);
 	run();
 
 	return 0;
