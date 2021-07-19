@@ -8,7 +8,7 @@
 static char *font = "monospace:pixelsize=13:antialias=true:autohint=true";
 static char *font2[] = { 
   "Noto Color Emoji:pixelsize=13:antialias=true:autohint=true",
-  "Tajawal:pixelsize=13:antialias=true:autohint=true" 
+  "Noto Sans Arabic:pixelsize=13:antialias=true:autohint=true" 
 };
 
 static int borderpx = 2;
