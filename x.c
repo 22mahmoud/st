@@ -2227,6 +2227,7 @@ reload(int sig)
 	xloadcols();
 	xunloadfonts();
 	xloadfonts(usedfont, 0);
+	xloadsparefonts();
 	xsetcursor(cursorshape);
 
 	/* pretend the window just got resized */
