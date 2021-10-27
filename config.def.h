@@ -225,6 +225,7 @@ ResourcePref resources[] = {
   { "termname",     STRING,  &termname },
   { "shell",        STRING,  &shell },
   { "alpha",        FLOAT,   &alpha },
+  { "alphaUnfocused",        FLOAT,   &alphaUnfocused },
   { "minlatency",   INTEGER, &minlatency },
   { "maxlatency",   INTEGER, &maxlatency },
   { "blinktimeout", INTEGER, &blinktimeout },
