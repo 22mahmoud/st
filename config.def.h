@@ -8,7 +8,8 @@
 static char *font = "monospace:pixelsize=13:antialias=true:autohint=true";
 static char *font2[] = { 
   "JoyPixels:pixelsize=10:antialias=true:autohint=true",
-  "Noto Sans Arabic:pixelsize=13:antialias=true:autohint=true" 
+  /* "Noto Sans Arabic:pixelsize=13:antialias=true:autohint=true"  */
+  "Kawkab Mono:pixelsize=13:antialias=true:autohint=true" 
 };
 
 static int borderpx = 2;
