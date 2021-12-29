@@ -132,6 +132,7 @@ ushort boxdrawindex(const Glyph *);
 void boxdraw_xinit(Display *, Colormap, XftDraw *, Visual *);
 void drawboxes(int, int, int, int, XftColor *, XftColor *, const XftGlyphFontSpec *, int);
 #endif
+int xgetcolor(int x, unsigned char *r, unsigned char *g, unsigned char *b);
 
 /* config.h globals */
 extern char *utmp;
@@ -147,3 +148,4 @@ extern unsigned int defaultfg;
 extern unsigned int defaultbg;
 extern float alpha, alphaUnfocused;
 extern const int boxdraw, boxdraw_bold, boxdraw_braille;
+extern unsigned int defaultcs;
