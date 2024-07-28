@@ -2785,7 +2785,9 @@ draw(void)
 	drawregion(0, 0, term.col, term.row);
 	if (TSCREEN.off == 0)
 		xdrawcursor(cx, term.c.y, TLINE(term.c.y)[cx],
-				term.ocx, term.ocy, TLINE(term.ocy)[term.ocx]);
+				term.ocx, term.ocy, TLINE(term.ocy)[term.ocx],
+				TLINE(term.ocy), term.col);
+
 	term.ocx = cx;
 	term.ocy = term.c.y;
 	xfinishdraw();
