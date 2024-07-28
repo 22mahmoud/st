@@ -24,7 +24,7 @@ st: $(OBJ)
 	$(CC) -o $@ $(OBJ) $(STLDFLAGS)
 
 clean:
-	rm -f *.orig *.rej st $(OBJ) config.h st-$(VERSION).tar.gz
+	@rm -vf *.diff *.orig *.rej st $(OBJ) config.h st-$(VERSION).tar.gz
 
 dist: clean
 	mkdir -p st-$(VERSION)
