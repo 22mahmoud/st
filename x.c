@@ -2116,6 +2116,27 @@ config_init(void)
 }
 
 void
+reload(int sig)
+{
+	config_init();
+
+	/* colors, fonts */
+	xloadcols();
+	xunloadfonts();
+	xloadfonts(font, 0);
+
+	/* pretend the window just got resized */
+	cresize(win.w, win.h);
+
+	redraw();
+
+	/* triggers re-render if we're visible. */
+	ttywrite("\033[O", 3, 1);
+
+	signal(SIGUSR1, reload);
+}
+
+void
 usage(void)
 {
 	die("usage: %s [-aiv] [-c class] [-f font] [-g geometry]"
@@ -2196,6 +2217,7 @@ run:
 		die("Can't open display\n");
 
 	config_init();
+	signal(SIGUSR1, reload);
 	cols = MAX(cols, 1);
 	rows = MAX(rows, 1);
 	defaultbg = MAX(LEN(colorname), 256);
