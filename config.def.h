@@ -250,7 +250,7 @@ static Shortcut shortcuts[] = {
 
 	{ TERMMOD,              XK_K,           zoom,           {.f = +1} },
 	{ TERMMOD,              XK_J,           zoom,           {.f = -1} },
-	{ TERMMOD,              XK_plus,       zoomreset,      {.f =  0} },
+	{ TERMMOD,              XK_plus,       zoomreset,       {.f =  0} },
 
 	{ TERMMOD,              XK_C,           clipcopy,       {.i =  0} },
 	{ TERMMOD,              XK_V,           clippaste,      {.i =  0} },

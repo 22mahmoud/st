@@ -3,3 +3,5 @@ config.h
 *.diff
 st
 *.tar.gz
+*.orig
+*.rej
