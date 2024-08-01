@@ -1272,6 +1272,9 @@ xinit(int cols, int rows)
 
 	xw.scr = XDefaultScreen(xw.dpy);
 
+	if (!(xw.dpy = XOpenDisplay(NULL)))
+		die("can't open display\n");
+
 	if (!(opt_embed && (parent = strtol(opt_embed, NULL, 0)))) {
 		parent = XRootWindow(xw.dpy, xw.scr);
 		xw.depth = 32;
@@ -2262,14 +2265,14 @@ resource_load(XrmDatabase db, char *name, enum resource_type rtype, void *dst)
 }
 
 void
-config_init(void)
+config_init(Display* dpy)
 {
 	char *resm;
 	XrmDatabase db;
 	ResourcePref *p;
 
 	XrmInitialize();
-	resm = XResourceManagerString(xw.dpy);
+	resm = XResourceManagerString(dpy);
 	if (!resm)
 		return;
 
@@ -2281,17 +2284,24 @@ config_init(void)
 void
 reload(int sig)
 {
-	config_init();
+  Display *dpy;
+	if (!(dpy = XOpenDisplay(NULL)))
+		die("Can't open display\n");
+
+	config_init(dpy);
 
 	/* colors, fonts */
 	xloadcols();
 	xunloadfonts();
 	xloadfonts(font, 0);
+  xloadsparefonts();
 
 	/* pretend the window just got resized */
-	cresize(win.w, win.h);
-
+	cresize(0, 0);
 	redraw();
+  xhints();
+
+	XCloseDisplay(dpy);
 
 	/* triggers re-render if we're visible. */
 	ttywrite("\033[O", 3, 1);
@@ -2379,8 +2389,11 @@ run:
 	if(!(xw.dpy = XOpenDisplay(NULL)))
 		die("Can't open display\n");
 
-	config_init();
 	signal(SIGUSR1, reload);
+  if (!(xw.dpy = XOpenDisplay(NULL)))
+		die("Can't open display\n");
+
+	config_init(xw.dpy);
 	cols = MAX(cols, 1);
 	rows = MAX(rows, 1);
 	defaultbg = MAX(LEN(colorname), 256);
