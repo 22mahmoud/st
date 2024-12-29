@@ -8,12 +8,12 @@
 static char *font = "Liberation Mono:pixelsize=12:antialias=true:autohint=true";
 /* Spare fonts */
 static char *font2[] = {
-  "JoyPixels:pixelsize=10:antialias=true:autohint=true",
-  /* "Noto Sans Arabic:pixelsize=13:antialias=true:autohint=true"  */
+  "JoyPixels:pixelsize=14:antialias=true:autohint=true",
+  "Noto Color Emoji:pixelsize=14:antialias=true:autohint=true",
   "Kawkab Mono:pixelsize=13:antialias=true:autohint=true"
 };
 
-static int borderpx = 2;
+static int borderpx = 6;
 
 /*
  * What program is execed by st depends of these precedence rules:
@@ -23,7 +23,7 @@ static int borderpx = 2;
  * 4: value of shell in /etc/passwd
  * 5: value of shell in config.h
  */
-static char *shell = "/bin/zsh";
+static char *shell = "/bin/bash";
 char *utmp = NULL;
 /* scroll program: to enable use a string like "scroll" */
 char *scroll = NULL;
